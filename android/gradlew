@@ -6,33 +6,30 @@
 ##
 ##############################################################################
 
-# Resolve links: $0 may be a link
 PRG="$0"
-while [ -h "$PRG" ] ; do
-  ls=`ls -ld "$PRG"`
-  link=`expr "$ls" : '.*-> \(.*\)$'`
+while [ -h "$PRG" ]; do
+  ls=$(ls -ld "$PRG")
+  link=$(expr "$ls" : '.*-> \(.*\)$')
   if expr "$link" : '/.*' > /dev/null; then
     PRG="$link"
   else
-    PRG=`dirname "$PRG"`"/$link"
+    PRG=$(dirname "$PRG")"/$link"
   fi
 done
 
-SAVED="`pwd`"
-cd "`dirname \"$PRG\"`/" >/dev/null
-APP_HOME="`pwd -P`"
+SAVED="$(pwd)"
+cd "$(dirname "$PRG")/" >/dev/null
+APP_HOME="$(pwd -P)"
 cd "$SAVED" >/dev/null
 
 APP_NAME="Gradle"
-APP_BASE_NAME=`basename "$0"`
+APP_BASE_NAME=$(basename "$0")
 
-# Add default JVM options here
 DEFAULT_JVM_OPTS=""
 
-# Locate java
-if [ -n "$JAVA_HOME" ] ; then
+if [ -n "$JAVA_HOME" ]; then
   JAVACMD="$JAVA_HOME/bin/java"
-  if [ ! -x "$JAVACMD" ] ; then
+  if [ ! -x "$JAVACMD" ]; then
     echo "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME" >&2
     exit 1
   fi
