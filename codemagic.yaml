@@ -1,21 +1,32 @@
 workflows:
   android-release:
-    name: EchoWolf Android 
+    name: EchoWolf Android
     max_build_duration: 60
+
     environment:
       flutter: 3.22.0
       java: 17
+
     scripts:
+      # 🔥 FORCE FIX for Windows line endings
+      - name: Fix line endings
+        script: |
+          sed -i 's/\r$//' android/gradlew
+          chmod +x android/gradlew
+
       - name: Get packages
         script: flutter pub get
+
       - name: Build APK
         script: |
           flutter build apk \
             --release \
             --target-platform android-arm,android-arm64 \
             --split-per-abi
+
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
+
     publishing:
       email:
         recipients:
