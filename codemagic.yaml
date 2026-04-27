@@ -8,8 +8,8 @@ workflows:
       java: 17
 
     scripts:
-      # 🔥 FORCE FIX for Windows line endings
-      - name: Fix line endings
+      # Fix Windows line endings + permission
+      - name: Fix gradlew
         script: |
           sed -i 's/\r$//' android/gradlew
           chmod +x android/gradlew
@@ -18,11 +18,7 @@ workflows:
         script: flutter pub get
 
       - name: Build APK
-        script: |
-          flutter build apk \
-            --release \
-            --target-platform android-arm,android-arm64 \
-            --split-per-abi
+        script: flutter build apk --release
 
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
