@@ -1,13 +1,27 @@
 plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace "com.echowolf.app"
+
     compileSdk 34
-    ndkVersion flutter.ndkVersion
+
+    defaultConfig {
+        applicationId "com.echowolf.app"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -17,24 +31,8 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
-
-    defaultConfig {
-        applicationId "com.echowolf.app"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "4.0.0"
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.debug
-            minifyEnabled false
-            shrinkResources false
-        }
-    }
 }
 
-flutter {
-    source '../..'
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
 }
